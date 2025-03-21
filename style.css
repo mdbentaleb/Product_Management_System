@@ -12,8 +12,8 @@ body {
 
 .container {
 	width: 60%;
-	min-height: 100vh;
-	margin: 30px auto;
+	min-height: 80vh;
+	margin:  30px auto;
 	padding: 30px 50px;
 	border-radius: 20px;
 	background-color: rgb(44, 44, 44);
@@ -33,7 +33,6 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	color: #000000;
 }
 .head-widget .widget h2 {
 	font-size: 3em;
@@ -45,11 +44,17 @@ body {
 }
 
 .head-widget .widget1 {
-	background-color: #5548d6;
+	color: #90b999;
+	border: 1px solid #90b999;
+	background-color: #000000;
 }
 
 .head-widget .widget2 {
-	background-color: #e3815a;
+	color: #000000;
+	background-color: #90b999;
+}
+.head-widget .widget2 h3 {
+	color: #000000;
 }
 
 .output {
@@ -112,10 +117,8 @@ input:focus {
 	width: 100%;
 }
 .output .addproduct .arrow {
-	width: 16px;
-	height: 16px;
+	width: 14px;
 }
-
 #btnaddproduct {
 	display: flex;
 	flex-direction: row;
@@ -123,7 +126,6 @@ input:focus {
 	justify-content: center;
 	gap: 10px;
 }
-
 #inputs {
 	border: 1px solid #90b999;
 	padding: 20px;
@@ -138,4 +140,18 @@ input:focus {
 	display: flex;
 	flex-direction: row;
 	gap: 15px;
+}
+table {
+	width: 100%;
+	text-align: center;
+	margin-top: 90px;
+	border-top: #000000 1px solid;
+	padding-top: 30px;
+}
+table th {
+	text-transform: uppercase;
+	color: #90b999;
+}
+table th,td {
+	padding: 10px;
 }
