@@ -6,3 +6,14 @@ document.getElementById("btnaddproduct").addEventListener("click", function() {
 		container.style.display = 'none';
 	}
 });
+
+const btnAddProduct = document.getElementById('btnaddproduct');
+const icon = document.getElementById('icon');
+
+btnAddProduct.addEventListener('click', () => {
+    if (icon.src.includes('imgs/down.png')) {
+        icon.src = 'imgs/up.png';
+    } else {
+        icon.src = 'imgs/down.png';
+    }
+});
