@@ -48,10 +48,10 @@
 		<div id="inputs">
 			<input type="text" id="title" placeholder="Title" />
 			<div class="price">
-				<input type="number" id="price" placeholder="Price" />
-				<input type="number" id="tax" placeholder="Tax" />
-				<input type="number" id="ads" placeholder="Ads" />
-				<input type="number" id="discount" placeholder="Discount" />
+				<input onkeyup="getTotal()" type="number" id="price" placeholder="Price" />
+				<input onkeyup="getTotal()" type="number" id="tax" placeholder="Tax" />
+				<input onkeyup="getTotal()" type="number" id="ads" placeholder="Ads" />
+				<input onkeyup="getTotal()" type="number" id="discount" placeholder="Discount" />
 			</div>
 			<input type="number" id="count" placeholder="Count" />
 			<input type="text" id="category" placeholder="Category" />
