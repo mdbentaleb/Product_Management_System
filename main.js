@@ -39,8 +39,8 @@ function getTotal() {
 
 // creat product
 let dataProduct;
-if (localStorage.product != null) {
-	dataProduct = JSON.parse(localStorage.product);
+if (localStorage.Products != null) {
+	dataProduct = JSON.parse(localStorage.Products);
 }
 else
 	dataProduct = [];
@@ -48,24 +48,66 @@ else
 submit.onclick = function() {
 	let newProduct = {
 		title: title.value,
-		price: price.value,
+		price: price.value + ' $',
 		tax: tax.value,
 		ads: ads.value,
-		discount: discount.value,
+		discount: discount.value + ' %',
 		total: totalvar,
 		count: count.value,
 		category: category.value,
 	}
 	dataProduct.push(newProduct);
+	
+	// save data input in local storage
+	localStorage.setItem('Products', JSON.stringify(dataProduct));
 
-	localStorage.setItem('product', JSON.stringify(dataProduct));
-	console.log(newProduct);
+	clearData();
+	showData();
+}
+
+// clear data input
+function clearData() {
+	title.value = '';
+	price.value = '';
+	tax.value = '';
+	ads.value = '';
+	discount.value = '';
+	count.value = '';
+	category.value = '';
+}
+
+// show data
+function showData() {
+	let table = '';
+
+	for (let i = 0; i < dataProduct.length; i++) {
+		table += `
+		<tr>
+			<td>${i + 1}</td>
+			<td>${dataProduct[i].title}</td>
+			<td>${dataProduct[i].price}</td>
+			<td>${dataProduct[i].tax}</td>
+			<td>${dataProduct[i].ads}</td>
+			<td>${dataProduct[i].discount}</td>
+			<td>${dataProduct[i].total}</td>
+			<td>${dataProduct[i].category}</td>
+			<td><button id="update">Update</button></td>
+			<td><button onclick="deletProduct(${i})" id="delete">Delete</button></td>
+		</tr>
+		`;
+	}
+	document.getElementById('tbody').innerHTML = table;
+}
+showData();
+
+//delet 1 product
+function deletProduct(i) {
+	dataProduct.splice(i, 1);
+	localStorage.Products = JSON.stringify(dataProduct);
+	showData();
 }
 
 
-// save data input in local storage
-// clear data input
-// show data
 // creat cout product in same time
 // delete product or all product
 // update product
