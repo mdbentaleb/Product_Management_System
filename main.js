@@ -1,22 +1,26 @@
-document.getElementById("btnaddproduct").addEventListener("click", function() {
-	const container = document.getElementById("inputs");
-	if (container.style.display === 'none' || container.style.display === '') {
-		container.style.display = 'block';
-	} else {
-		container.style.display = 'none';
-	}
-});
-
+const container = document.getElementById("inputs");
 const btnAddProduct = document.getElementById('btnaddproduct');
 const icon = document.getElementById('icon');
 
-btnAddProduct.addEventListener('click', () => {
-    if (icon.src.includes('imgs/down.png')) {
+btnAddProduct.addEventListener("click", (event) => {
+    if (container.style.display === 'none' || container.style.display === '') {
+        container.style.display = 'block';
         icon.src = 'imgs/up.png';
     } else {
+        container.style.display = 'none';
+        icon.src = 'imgs/down.png';
+    }
+
+    event.stopPropagation();
+});
+
+document.addEventListener("click", (event) => {
+    if (!container.contains(event.target) && !btnAddProduct.contains(event.target)) {
+        container.style.display = 'none';
         icon.src = 'imgs/down.png';
     }
 });
+
 
 
 let title = document.getElementById("title");
@@ -46,23 +50,28 @@ else
 	dataProduct = [];
 
 submit.onclick = function() {
-	let newProduct = {
-		title: title.value,
-		price: price.value + ' $',
-		tax: tax.value,
-		ads: ads.value,
-		discount: discount.value + ' %',
-		total: totalvar,
-		count: count.value,
-		category: category.value,
-	}
-	dataProduct.push(newProduct);
-	
-	// save data input in local storage
-	localStorage.setItem('Products', JSON.stringify(dataProduct));
+	if (title.value !== '' && price.value !== '' && category.value !== '') {
+		let newProduct = {
+			title: title.value,
+			price: price.value + ' $',
+			tax: tax.value,
+			ads: ads.value,
+			discount: discount.value + ' %',
+			total: totalvar,
+			count: count.value,
+			category: category.value,
+		}
+		dataProduct.push(newProduct);
+		
+		// save data input in local storage
+		localStorage.setItem('Products', JSON.stringify(dataProduct));
 
-	clearData();
-	showData();
+		showMessage('Product added successfully!', '#d4edda', '#155724', '#c3e6cb');
+		clearData();
+		showData();
+	} else {
+        showMessage('Please fill in the Title, Price, and Category fields!', '#f8d7da', '#721c24', '#f5c6cb');
+    }
 }
 
 // clear data input
@@ -97,6 +106,9 @@ function showData() {
 		`;
 	}
 	document.getElementById('tbody').innerHTML = table;
+
+	//widget product count
+	document.getElementById("productCount").innerHTML = dataProduct.length;
 }
 showData();
 
@@ -105,6 +117,7 @@ function deletProduct(i) {
 	dataProduct.splice(i, 1);
 	localStorage.Products = JSON.stringify(dataProduct);
 	showData();
+	showMessage('Product deleted successfully!', '#d4edda', '#155724', '#c3e6cb');
 }
 
 
@@ -113,3 +126,17 @@ function deletProduct(i) {
 // update product
 // search product
 // clean data
+
+// notification
+function showMessage(message, bgColor, textColor, borderColor) {
+    const messageBox = document.getElementById('message');
+    messageBox.innerText = message;
+    messageBox.style.backgroundColor = bgColor;
+    messageBox.style.color = textColor;
+    messageBox.style.borderColor = borderColor;
+    messageBox.style.display = 'block';
+
+    setTimeout(() => {
+        messageBox.style.display = 'none';
+    }, 3000);
+}

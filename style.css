@@ -146,6 +146,7 @@ table {
 	margin-top: 90px;
 	border-top: #000000 1px solid;
 	padding-top: 30px;
+	text-overflow: initial;
 }
 table th {
 	text-transform: uppercase;
